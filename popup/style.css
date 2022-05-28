@@ -1,6 +1,61 @@
 body {
   min-width: 300px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #e7e7e7;
+  padding: 10px;
+}
+
+.image {
+  max-width: fit-content;
+  margin-right: 20px;
+}
+
+#icon {
+  width: 60px;
+  box-shadow: rgb(33 33 33 / 20%) 0px 4px 16px;
+  border-radius: 100%;
+}
+
+.titles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 60px;
+  max-width: 250px;
+  margin: auto;
+}
+
+#error, #word{
+  font-size: 27px;
+  max-width: fit-content;
+  margin-left: 20px;
+  color: #c25556;
+  font-weight: 400;
+}
+
+.mid {
+  color: #08361e;
+  width: 100%;
+  font-size: 12px;
+
+}
+
+.firstB p {
+  background-color: #d8d8d8;
+  color: #08361e;
+  font-size: 25px;
+  padding: 5px;
+  padding-top: 0px;
+}
+
+.secondB p {
+  background-color: #297a4d;
+  color: #d8d8d8;
+  padding: 5px;
+  box-shadow: rgb(33 33 33 / 20%) 0px 4px 16px;
 }
 
 h2 {

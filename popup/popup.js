@@ -8,11 +8,11 @@ function gotTabs(tabs) {
 
   chrome.tabs.sendMessage(tabs[0].id, msg, function (response) {
     if (!response) {
-      document.getElementById("phonetic").innerHTML = "Welcome!";
+      document.getElementById("phonetic").innerHTML = "Bem-Vindo!";
       document.getElementById("example").innerHTML =
-        "Please select a word to find its definition.";
+        "Selecione sua palavra.";
     } else if (response.swor === "_TextNotSelected_") {
-      document.getElementById("error").innerHTML = "Please select a word!";
+      document.getElementById("error").innerHTML = "Selecione uma palavra!";
     } else {
       let swo = response.swor;
       swo = swo.replace(/[^a-zA-Z ]/g, "");
@@ -27,19 +27,17 @@ let wordef,
   pos,
   defin,
   example,
-  sourceurl,
   index = 0,
   indlimit;
 
 async function dictionary(query) {
-  let url = `https://api.dictionaryapi.dev/api/v2/entries/en/${query}`;
+  let url = `http://localhost:3333/v2/${query}`;
   let response = await fetch(url);
   wordef = await response.json();
   if (wordef && !wordef.title) {
     indlimit = wordef[0].meanings.length;
-    word = wordef[0].word;
-    phonetic = wordef[0].phonetic ? wordef[0].phonetic : "";
-    sourceurl = `https://en.wiktionary.org/wiki/${word}`;
+    word = query;
+    phonetic = wordef[0].partOfSpeech ? wordef[0].partOfSpeech : "";
     index = 0;
 
     setValues();
@@ -70,15 +68,15 @@ function handleNext() {
 }
 
 function setValues() {
-  pos = wordef[0].meanings[index].partOfSpeech;
-  defin = wordef[0].meanings[index].definitions[0].definition;
-  example = wordef[0].meanings[index].definitions[0].example
-    ? wordef[0].meanings[index].definitions[0].example
+  pos = wordef[0].partOfSpeech;
+  defin = wordef[0].meanings[index];
+  example = wordef[0].etymology
+    ? wordef[0].etymology
     : null;
 
   document.getElementById(
     "word"
-  ).innerHTML = `${word} <a href=${sourceurl} class="searchanchor" target="_blank"><img class="searchsvg" title="read more" src = "../assets/searchonweb.svg" alt="read more"/><a>`;
+  ).innerHTML = `${word}`;
   document.getElementById("phonetic").innerHTML = `${phonetic}  (${pos})`;
   document.getElementById("definition").innerHTML = defin;
   if (example) {
