@@ -1,3 +1,4 @@
+
 let query = { active: true, currentWindow: true };
 
 chrome.tabs.query(query, gotTabs);
@@ -20,6 +21,8 @@ function gotTabs(tabs) {
     }
   });
 }
+
+
 
 let wordef,
   word,
